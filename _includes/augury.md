@@ -8,8 +8,7 @@
 <!-- .slide: id="augury-what-is-augury" -->
 ## What is Augury?
 
-- [Augury](https://augury.angular.io/) is a Chrome DevTools extensions for debugging and profiling Angular applications
-- Disclaimer: Augury was authored by [Rangle.io](http://rangle.io)
+[Augury](https://augury.angular.io/) is a Chrome DevTools extension for debugging and profiling Angular applications
 
 <img src="../images/augury.svg" width="200" style="box-shadow: none" alt="Augury Logo"/>
 
