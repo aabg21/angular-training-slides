@@ -77,21 +77,6 @@ $selectionColor: #fff;
 // ---------------------------------------------
 
 // Overrides -----------------------------------
-#rangle-io {
-  background: url('../images/logo-rangleio-purple.svg') no-repeat;
-  background-size: contain;
-  height: 0.4em;
-  left: 0 !important;
-  position: absolute !important;
-  right: 0 !important;
-  text-indent: -99999em;
-  top: 180px !important;
-
-  &:before {
-    display: none;
-  }
-}
-
 body {
   p, ul, ol, table {
     color: $ranglePurple;
@@ -150,8 +135,8 @@ body {
   }
 
   .slides {
-    background: url('../images/logo-rangleio-purple.svg') top right no-repeat;
-    background-size: 125px auto;
+    background: url('../images/dellemc-bluegray.svg') top right no-repeat;
+    background-size: 150px auto;
     margin-top: 60px;
     text-align: left;
 
@@ -172,7 +157,7 @@ body {
     box-shadow: none;
     font-size: 0.75em;
     width: auto;
-    
+
     code {
       max-height: none;
     }
@@ -194,14 +179,3 @@ body {
 html.the-end .state-background {
    background-color: rgba(0,0,0, 0.8);
  }
-
-.searchicon {
-  display: none;
-}
-
-.searchinput {
-  vertical-align: top;
-    right: 45px;
-    top: 30px;
-    position: fixed;
-}

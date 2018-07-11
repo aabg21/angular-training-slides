@@ -5,46 +5,10 @@
 # Setup
 
 ---
-<!-- .slide: id="setup-roadmap" -->
-## Roadmap
-
-1. How do I install the software I need for this training?
-1. How do I create a new Angular project?
-1. What is in a basic Angular project?
-1. What is TypeScript?
-
----
-<!-- .slide: id="setup-software-overview" -->
-## Software Overview
-
-- NPM (Node Package Manager) allows you to install JavaScript libraries
-- NVM (Node version Manager) allows you to download, install, and switch between Node versions
-  - Some NPM modules require specific versions of Node
-  - And you may have to juggle multiple projects with different versions
-  - So NVM allows you to do this without having to install and uninstall
-
----
-<!-- .slide: id="setup-installing-nvm" -->
-## Installing NVM
-
-- Linux and Mac OS: go to [nvm.sh](http://nvm.sh) and follow instructions
-  - Note: this defines `nvm` as a shell alias, *not* as a standalone program
-  - So `which nvm` will *not* work
-- Windows: go to [nvm-windows](https://github.com/coreybutler/nvm-windows)
-
----
-<!-- .slide: id="setup-installing-node" -->
-## Installing Node
-
-- Get the latest LTS (Long Term Support) version
-- `nvm install --lts`
-
----
 <!-- .slide: id="setup-installing-angular-cli" -->
 ## Installing Angular CLI
 
 - A command-line interface (CLI) for creating and managing Angular applications
-- Not strictly necessary, but very useful
 - `npm install --global @angular/cli`
 
 ---
@@ -61,9 +25,6 @@ This will:
 - Set up unit testing
 
 This may take a few minutes to run the first time...
-
-**Proxies:** Please  disable any proxies that you may have setup in your environment,
-as they can interfere with downloading the packages.
 
 ---
 <!-- .slide: id="setup-top-level-project-structure" -->

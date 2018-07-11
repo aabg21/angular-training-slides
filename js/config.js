@@ -32,5 +32,5 @@ require.ensure([], function () {
 
   require('script!reveal.js/plugin/zoom-js/zoom.js');
   require('script!reveal.js/plugin/notes/notes.js');
-  require('script!reveal.js/plugin/search/search.js');
+  // require('script!reveal.js/plugin/search/search.js');
 });

@@ -77,6 +77,8 @@ you must:
 
 1.  Check out [this repository][repo] from GitHub.
 
+1. On Windows: Run `npm i -g --production windows-build-tools`
+
 1.  Run `npm install` to install the JavaScript packages needed by [Reveal.js][reveal].
 
 You only need to do these steps once.
