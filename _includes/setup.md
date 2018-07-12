@@ -31,57 +31,169 @@ This may take a few minutes to run the first time...
 ## Top-Level Project Structure
 
 ```
+├── angular.json
 ├── package.json
 ├── tsconfig.json
 ├── node_modules/
 ├── src/
 ```
 
+- `angular.json`: Angular CLI configuration
 - `package.json`: project metadata
   - Modules needed to run application
   - Custom commands
   - Author, version, and license information
-- `node_modules`: directory containing libraries and dependencies used by the application
-  - Do *not* edit by hand
-- `src` folder: application code
 - `tsconfig.json`: TypeScript configuration
+- `node_modules`: directory containing libraries and dependencies used by the application
+  - *Do not edit by hand*
+- `src` folder: application code
 
 ---
-<!-- .slide: id="setup-typescript" -->
-## TypeScript
+<!-- .slide: id="hello-whats-where-1" -->
+## What's Where
 
-- TypeScript is a superset of modern JavaScript with optional type definitions
-  - Useful in small projects
-  - *Really* useful in large ones
-- Use `.ts` as a file suffix
-- TypeScript is compiled to JavaScript before being run in the browser
-  - So types aren't visible in browser's debugger at runtime
-- `./tsconfig.json` specifies how to compile it
-  - E.g., whether to generate ES5- or ES6-compliant JavaScript
+```
+├── src
+│   ├── index.html
+│   ├── main.ts
+│   ├── app/...
+```
+
+The `src` folder has:
+
+- `index.html`: contains the entire application
+  - Everything interesting right now is one level down in `app`
+- `main.ts`: bootstraps the application
+  - This can change from platform to platform
+  - So that everything else doesn't have to
 
 ---
-<!-- .slide: id="setup-typescript-example" -->
-## TypeScript Example
+<!-- .slide: id="hello-whats-where-2" -->
+## What's Where
+
+```
+├── src
+│   ├── app
+│   │   ├── app.component.css
+│   │   ├── app.component.html
+│   │   ├── app.component.spec.ts
+│   │   ├── app.component.ts
+│   │   ├── app.module.ts
+```
+
+The *application* as a whole has:
+
+- `app.module.ts`: what to load and how to launch
+- Main application:
+  - Code: `app.component.ts`
+  - HTML: `app.component.html`
+  - CSS: `app.component.css`
+  - Test spec: `app.component.spec.ts`
+
+---
+<!-- .slide: id="hello-running-the-application" -->
+## Running the Application
+
+- `ng serve` launches the application
+- Should see a welcome page
+- Worth exploring the page using developer tools
+
+---
+<!-- .slide: id="hello-whats-in-the-component-1" -->
+## What's in the Component?
+
+#### _src/app/app.component.ts_
+```ts
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'app works!';
+}
+```
+
+- `Component` is a **decorator** used to define Angular components
+- Decorators allows us to alter a class or function
+  - In this case, add metadata for Angular to use
+
+---
+<!-- .slide: id="hello-whats-in-the-component-2" -->
+## What's in the Component?
+
+#### _src/app/app.component.ts_
+```ts
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'app works!';
+}
+```
+
+- `@Component` is a *decorator* that adds metadata to the `AppComponent` class
+  - `selector` tells Angular to use this class to fill in uses of `<app-root></app-root>`
+  - `templateUrl` tells it where to find the HTML to use for filling in
+  - `styleUrls` is a list of CSS style files to apply to this component
+
+---
+<!-- .slide: id="hello-whats-in-the-component-3" -->
+## What's in the Component?
+
+#### _src/app/app.component.ts_
+```ts
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'app works!';
+}
+```
+
+- The `AppComponent` class defines how this component behaves
+- So far, it just has a single instance variable and no actions
+- Note that we don't need to declare the type of `title`
+  - TypeScript does *type inference* to figure that out
+
+---
+<!-- .slide: id="hello-notes-on-components" -->
+## Notes on Components
+
+- Components are the core building blocks of Angular applications
+  - Application logic + display
+  - Everything on a page should be associated with some component
+- Can put HTML and CSS inline using `template` and `style`
 
 ```ts
-function add(a: number, b: number) {
-  return a + b;
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  template: '<h1>{{title}}</h1>',          // inline HTML
+  styles: ['h1 { font-weight: normal; }']  // inline styles
+})
+export class AppComponent {
+  title = 'app works!';
 }
-
-add(1, 3);   // returns 4
-add(1, '3'); // causes a compiler error
-
-class TodoItems {
-  items: string[];  // or Array<string>
-
-  constructor(initialItems: string[]) {
-    this.items = initialItems;
-  }
-
-  empty(): boolean {
-    return this.items.length == 0;
-  }
-}
-
-const allItems = new TodoItems(['install NPM', 'install Node']);
 ```
+
+---
+<!-- .slide: id="hello-template-syntax" -->
+## Component Template Syntax
+
+- `<h1>{{title}}</h1>` represents *interpolation*
+- Evaluates the expression in `{{...}}` and inserts the result as a string
+- Symbols such as `title` are evaluated in an expression context
+- In this case, the component instance
+- We'll see lots more syntax later...

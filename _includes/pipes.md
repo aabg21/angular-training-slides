@@ -137,3 +137,26 @@ export class TitlecasePipe implements PipeTransform {
 ```
 
 ![Converting to Title Case](../images/screenshot-titlecase.png)
+
+---
+<!-- .slide: id="pipes-pure-and-impure" -->
+
+## Pure vs Impure Pipes
+
+- A pure pipe is executed every time the **reference** of the bound value is changed
+  - Custom pipes are pure by default
+  - All built-in pipes are pure except of `async`
+
+```ts
+@Pipe({ name: 'pure' })
+export class PurePipe implements PipeTransform { /* ... */ }
+```
+
+- An impure pipe is executed every time change detection is executed
+  - App performance could be severely degraded
+  - To define a pipe as impure, we need to use the property/value `pure: false`
+
+```ts
+@Pipe({ name: 'impure', pure: false })
+export class ImpurePipe implements PipeTransform { /* ... */ }
+```

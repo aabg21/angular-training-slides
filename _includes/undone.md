@@ -20,36 +20,6 @@ These are the most-used lifecycle hooks:
 **Pro Tip:** Prefer putting initialization logic in `ngOnInit` instead of `constructor`
 
 ---
-
-## Pure vs Impure Pipes
-
-- A pure pipe is executed every time the **reference** of the bound value is changed
-  - Custom pipes are pure by default
-  - All built-in pipes are pure except of `async`
-
-```ts
-@Pipe({ name: 'pure' })
-export class PurePipe implements PipeTransform { /* ... */ }
-```
-
-- An impure pipe is executed every time change detection is executed
-  - App performance could be severely degraded
-  - To define a pipe as impure, we need to use the property/value `pure: false`
-
-```ts
-@Pipe({ name: 'impure', pure: false })
-export class ImpurePipe implements PipeTransform { /* ... */ }
-```
-
-[View Example](https://plnkr.co/edit/a6TYpCugGXlz12B2RI2t?p=preview)
-
-Notes:
-
-- Simple types like `string`, `number` and `boolean` are immutable by default
-- Mutating an `object` or an `array` does not change the reference
-
----
-
 ## Two-Way Data Binding
 
 - Combination of an `@Input` with an `@Output` using the *banana in a box* syntax `[(event)]`
@@ -130,7 +100,7 @@ export class AppComponent {
     this.values = form.value;
   }
 }
-```    
+```
 
 [View Example](https://plnkr.co/edit/ttVaCf?p=preview)
 

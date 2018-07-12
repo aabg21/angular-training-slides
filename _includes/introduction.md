@@ -13,8 +13,7 @@
   - Dependency Injection (that human beings can use)
   - TypeScript
   - Tooling: IDEs, [Augury](https://augury.angular.io/), ...
-  - Supporting projects: Angular CLI, Universal, NativeScript, ...
-- Straightforward integration with Redux for state management
+  - Supporting projects: Angular CLI, Ionic, NativeScript, ...
 - You don't need to be a JavaScript expert
 - Better performance than Angular 1:
   - Improved change detection
