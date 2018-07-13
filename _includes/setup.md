@@ -110,7 +110,8 @@ The *application* as a whole has:
   - `Pipe`: Helps to show information
   - `Service`: Logical behaviors
   
-- *Everything is in plain JavaScript, and everything is a class in Angular*
+- *Everything is in plain JavaScript*
+- *Everything is a class in Angular*
 
 ---
 
@@ -185,4 +186,3 @@ export class AppComponent {
 
 - `ng serve` launches the application
 - Should see a welcome page
-- Worth exploring the page using developer tools

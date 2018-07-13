@@ -121,3 +121,28 @@ which field of the `@NgModule` decorator should I put the class in?
 ## Answer
 
 Correct answer is `declarations`.
+
+---
+<!-- .slide: id="quiz-events" -->
+<!-- .slide: data-background="../images/question-slide.jpg" -->
+
+## Quiz
+
+What is the difference between:
+
+(A) `<counter [count]="count()"></counter>`
+
+(B) `<counter (count)="count()"></counter>`
+
++++
+<!-- .slide: data-background="../images/answer-slide.jpg" -->
+
+## Answer
+
+`<counter [count]="count()"></counter>`
+- passes the result of calling `this.count()` into the `<counter>` component via an input.
+
+`<counter (count)="count()"></counter>`
+- calls `this.count()` whenever the `<counter>` component emits a value through its own `EventEmitter` member `count`.
+
+---
