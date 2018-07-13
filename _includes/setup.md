@@ -34,6 +34,7 @@ This may take a few minutes to run the first time...
 ├── angular.json
 ├── package.json
 ├── tsconfig.json
+├── tslint.json
 ├── node_modules/
 ├── src/
 ```
@@ -44,18 +45,22 @@ This may take a few minutes to run the first time...
   - Custom commands
   - Author, version, and license information
 - `tsconfig.json`: TypeScript configuration
+- `tslint.json`: TypeScript lint sets of rules
 - `node_modules`: directory containing libraries and dependencies used by the application
   - *Do not edit by hand*
-- `src` folder: application code
 
 ---
-<!-- .slide: id="hello-whats-where-1" -->
+<!-- .slide: id="whats-where-src" -->
 ## What's Where
 
 ```
 ├── src
 │   ├── index.html
 │   ├── main.ts
+│   ├── styles.css
+│   ├── tslint.json
+│   ├── assets/...
+│   ├── environments/...
 │   ├── app/...
 ```
 
@@ -66,9 +71,12 @@ The `src` folder has:
 - `main.ts`: bootstraps the application
   - This can change from platform to platform
   - So that everything else doesn't have to
+- `styles.css`: global CSS styles
+- `assets/`: images, fonts, ...
+- `environments/`: dev/prod environments constants
 
 ---
-<!-- .slide: id="hello-whats-where-2" -->
+<!-- .slide: id="whats-where-app" -->
 ## What's Where
 
 ```
@@ -85,115 +93,96 @@ The *application* as a whole has:
 
 - `app.module.ts`: what to load and how to launch
 - Main application:
-  - Code: `app.component.ts`
+  - Code: `app.component.ts` (root element)
+    - Modules, Components, Directives, Pipes, Services, ...
   - HTML: `app.component.html`
   - CSS: `app.component.css`
   - Test spec: `app.component.spec.ts`
 
 ---
+
+<!-- .slide: id="angular-module-explained" -->
+## Angular module explained
+
+- `NgModule`: Packages of views and logic:
+  - `Component`: Widgets, visual elements
+  - `Directive`: Properties that add behaviors to elements
+  - `Pipe`: Helps to show information
+  - `Service`: Logical behaviors
+  
+- *Everything is in plain JavaScript, and everything is a class in Angular*
+
+---
+
+<!-- .slide: id="whats-in-ngmodule" -->
+## What's in NgModule?
+
+#### _src/app/app.module.ts_
+```ts
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+
+```
+- `@NgModule` is a **decorator** used to define Angular modules
+- `declerations`: Set of components, directives and pipes that belong to this module
+- `imports`: Set of modules, whose exported declarations are available to this module
+- `exports`: Set of declarations and modules that can be used within another module
+- `providers`: Set of injectables that are available in the injector of this module
+- `bootstrap`: Set of components that are bootstrapped when the module is bootstrapped
+- `entryComponents`: Set of components to compile when this module is defined
+
+---
+
+<!-- .slide: id="whats-in-the-component" -->
+## What's in the Component?
+
+#### _src/app/app.component.ts_
+```ts
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+```
+
+- `@Component` is a **decorator** used to define Angular components
+- `selector`: Tells Angular to use this class to fill in uses of `<app-root></app-root>`
+- `template`: Inline HTML to use for filling in
+- `templateUrl`: Tells Angular where to find the HTML to use for filling in
+- `styles`: List of inline CSS stylesheets to apply to this component
+- `styleUrls`: List of CSS style files to apply to this component
+
+---
+<!-- .slide: id="component-template-syntax" -->
+## Component Template Syntax
+
+```ts
+@Component({
+  selector: 'app-root',
+  template: '<h1>{{title}}</h1>'
+})
+export class AppComponent {
+  title = 'app works!';
+}
+```
+- `<h1>{{title}}</h1>` represents *interpolation*
+- Evaluates the expression in `{{...}}` and inserts the result as a string
+- Symbols such as `title` are evaluated in an expression context
+- In this case, the component instance
+
+---
+
 <!-- .slide: id="hello-running-the-application" -->
 ## Running the Application
 
 - `ng serve` launches the application
 - Should see a welcome page
 - Worth exploring the page using developer tools
-
----
-<!-- .slide: id="hello-whats-in-the-component-1" -->
-## What's in the Component?
-
-#### _src/app/app.component.ts_
-```ts
-import { Component } from '@angular/core';
-
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
-})
-export class AppComponent {
-  title = 'app works!';
-}
-```
-
-- `Component` is a **decorator** used to define Angular components
-- Decorators allows us to alter a class or function
-  - In this case, add metadata for Angular to use
-
----
-<!-- .slide: id="hello-whats-in-the-component-2" -->
-## What's in the Component?
-
-#### _src/app/app.component.ts_
-```ts
-import { Component } from '@angular/core';
-
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
-})
-export class AppComponent {
-  title = 'app works!';
-}
-```
-
-- `@Component` is a *decorator* that adds metadata to the `AppComponent` class
-  - `selector` tells Angular to use this class to fill in uses of `<app-root></app-root>`
-  - `templateUrl` tells it where to find the HTML to use for filling in
-  - `styleUrls` is a list of CSS style files to apply to this component
-
----
-<!-- .slide: id="hello-whats-in-the-component-3" -->
-## What's in the Component?
-
-#### _src/app/app.component.ts_
-```ts
-import { Component } from '@angular/core';
-
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
-})
-export class AppComponent {
-  title = 'app works!';
-}
-```
-
-- The `AppComponent` class defines how this component behaves
-- So far, it just has a single instance variable and no actions
-- Note that we don't need to declare the type of `title`
-  - TypeScript does *type inference* to figure that out
-
----
-<!-- .slide: id="hello-notes-on-components" -->
-## Notes on Components
-
-- Components are the core building blocks of Angular applications
-  - Application logic + display
-  - Everything on a page should be associated with some component
-- Can put HTML and CSS inline using `template` and `style`
-
-```ts
-import { Component } from '@angular/core';
-
-@Component({
-  selector: 'app-root',
-  template: '<h1>{{title}}</h1>',          // inline HTML
-  styles: ['h1 { font-weight: normal; }']  // inline styles
-})
-export class AppComponent {
-  title = 'app works!';
-}
-```
-
----
-<!-- .slide: id="hello-template-syntax" -->
-## Component Template Syntax
-
-- `<h1>{{title}}</h1>` represents *interpolation*
-- Evaluates the expression in `{{...}}` and inserts the result as a string
-- Symbols such as `title` are evaluated in an expression context
-- In this case, the component instance
-- We'll see lots more syntax later...

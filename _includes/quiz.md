@@ -39,7 +39,7 @@ bring it up that it's convention.
 
 ## Question
 
-Which one is better than the other?
+What would you rather choose?
 
 1. `[users]="getActiveUsers()"`
 1. `[users]="users | activeUsers"`
