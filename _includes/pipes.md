@@ -5,15 +5,8 @@
 # Pipes
 
 ---
-<!-- .slide: id="pipes-roadmap" -->
-## Roadmap
-
-1. How do I format data using a pipe?
-1. How do I create my own pipes?
-
----
 <!-- .slide: id="pipes-motivation" -->
-## Motivation
+## Why do we need pipes?
 
 - Classes could turn everything into strings for display
 - Often easier to use a *pipe* in the HTML
@@ -29,16 +22,14 @@
 - Put the name of the pipe inside `{{...}}`
 - Use vertical bar `|` as separator
 
-#### _src/app/to-do-list/to-do-list.component.html_
+#### _src/app/todo-list/todo-list.component.html_
 ```html
 <ul>
-  <li *ngFor="let item of thingsToDo; let i = index" [id]="i">
+  <li *ngFor="let item of thingsToDo">
     {{item | uppercase}}
   </li>
 </ul>
 ```
-
-![Converting to Upper Case](../images/screenshot-uppercase.png)
 
 ---
 <!-- .slide: id="pipes-passing-arguments" -->
@@ -109,36 +100,7 @@ export class TitlecasePipe implements PipeTransform {
 - Returns a transformed value
 
 ---
-<!-- .slide: id="pipes-defining-our-transformation" -->
-## Defining Our Transformation
 
-#### _src/app/titlecase.ts_
-```ts
-export class TitlecasePipe implements PipeTransform {
-
-  transform(value: any, args?: any): any {
-    return value.charAt(0).toUpperCase()
-         + value.substr(1).toLowerCase();
-  }
-}
-```
-
----
-<!-- .slide: id="pipes-using-our-pipe" -->
-## Using Our Pipe
-
-#### _src/app/to-do-list/to-do-list.component.html_
-```html
-<ul>
-  <li *ngFor="let item of thingsToDo; let i = index" id="{{i}}">
-    {{item | titlecase}}
-  </li>
-</ul>
-```
-
-![Converting to Title Case](../images/screenshot-titlecase.png)
-
----
 <!-- .slide: id="pipes-pure-and-impure" -->
 
 ## Pure vs Impure Pipes
@@ -160,3 +122,11 @@ export class PurePipe implements PipeTransform { /* ... */ }
 @Pipe({ name: 'impure', pure: false })
 export class ImpurePipe implements PipeTransform { /* ... */ }
 ```
+
+---
+
+<!-- .slide: id="pipes-demo" -->
+
+## Let's count some todos!
+
+![demo](../images/todo-list-final.png)
