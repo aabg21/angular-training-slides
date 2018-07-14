@@ -140,6 +140,21 @@ Passing strings to components in this way resembles setting properties in HTML e
 - `thingsToDo` on the *right* is what we're passing in
 
 ---
+
+## Component Lifecycle
+
+Angular manages creation, rendering, data-bound properties etc. It also offers hooks that allow us to respond to key lifecycle events.
+
+These are the most-used lifecycle hooks:
+
+- `ngOnInit` - When bound inputs pass values the first time.
+- `ngOnDestroy` - Before component is destroyed.
+- `ngAfterContentInit` - After component's (ng-)content is initialized.
+- `ngAfterViewInit` - After component's view is initialized.
+
+**Pro Tip:** Prefer putting initialization logic in `ngOnInit` instead of `constructor`
+
+---
 <!-- .slide: id="components-get-dirty" -->
 
 ## Let's get our hands dirty!

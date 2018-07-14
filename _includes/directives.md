@@ -21,7 +21,8 @@ There are two types of directives:
 <!-- .slide: id="directives-ngstyle-1" -->
 ## `NgStyle` Directive (1/2)
 
-Directive that modifies the `style` attribute of a component
+- Directive that modifies the `style` attribute of a component
+- The `NgClass` directive can be used with objects and attributes.
 
 ```ts
 @Component({
@@ -33,7 +34,6 @@ Directive that modifies the `style` attribute of a component
         'font-weight': 'bold',
         borderBottom: borderStyle
     }">
-      <ng-content></ng-content>
     </p>
   `
 })
@@ -42,50 +42,40 @@ export class StyleExampleComponent {
 }
 ```
 
-[View Example](https://plnkr.co/edit/raYS8ou6AZru8UDc6hJs?p=preview)
-
 ---
 <!-- .slide: id="directives-ngstyle-2" -->
 ## `NgStyle` Directive (2/2)
 
-Directive with a property selector `[ngStyle]`
+Used with attribute:
 
 ```ts
-@Directive({ selector: [ngStyle] })
-```
-
-It has an input property called `ngStyle` which expects an object
-
-```ts
-class NgStyleDirective { @Input() ngStyle: SomeShape; }
-```
-
-The object accepts CSS properties in kebab case or camel case
-
-```ts
-'font-weight': ... // kebab case
-borderBottom: ... // camel case
-```
-
-The final style it's going to be a combination of the `style` attribute and `[ngStyle]`
-
-```html
-<p style="padding:1rem; color:red; font-weight:bold; border:1px solid black">
-
+@Component({
+  selector: 'style-example',
+  template: `
+    <p style="padding: 1rem"
+      [style.color]="'red'"
+      [style.font-weight]="'bold'"
+      [style.borderBottom]="borderStyle">
+    </p>
+  `
+})
+export class StyleExampleComponent {
+  borderStyle = '1px solid black';
+}
 ```
 
 ---
+
 <!-- .slide: id="directives-ngclass-1" -->
-## `NgClass` Directive (1/4)
+## `NgClass` Directive (1/5)
 
 - Changes the `class` attribute of the host component
-- The `NgClass` directive can be used with strings, arrays or objects
+- The `NgClass` directive can be used with strings, arrays, objects and attributes.
 
 ```ts
 @Component({
   selector: 'class-as-string',
   template: '<p ngClass="centered-text underlined" class="orange"></p>',
-  styles: [ ... ]
 })
 export class ClassAsStringComponent {}
 ```
@@ -97,15 +87,16 @@ Resulting class attribute:
 ```
 
 ---
+
 <!-- .slide: id="directives-ngclass-2" -->
-## `NgClass` Directive (2/4) - String
+## `NgClass` Directive (2/5) - String
 
 Used with a string:
 
 ```ts
-@Component({ selector: 'class-as-string',
+@Component({
+  selector: 'class-as-string',
   template: '<p ngClass="centered-text underlined" class="orange"></p>',
-  styles: [ ... ]
 })
 export class ClassAsStringComponent {}
 ```
@@ -113,27 +104,25 @@ export class ClassAsStringComponent {}
 Or using a string property
 
 ```ts
-@Component({ selector: 'class-as-string',
+@Component({
+  selector: 'class-as-string',
   template: '<p [ngClass]="classes" class="orange"></p>',
-  styles: [ ... ]
 })
 export class ClassAsStringComponent {
   classes = 'centered-text underlined';
 }
 ```
 
-[View Example](https://plnkr.co/edit/uYihwapmBxNaqGDeawwS?p=preview)
-
 ---
 <!-- .slide: id="directives-ngclass-3" -->
-## `NgClass` Directive (3/4) - Array
+## `NgClass` Directive (3/5) - Array
 
 Used with an array:
 
 ```ts
-@Component({ selector: 'class-as-string',
+@Component({
+  selector: 'class-as-string',
   template: '<p [ngClass]="['centered-text', 'underlined']" class="orange"></p>',
-  styles: [ ... ]
 })
 export class ClassAsStringComponent {}
 ```
@@ -141,20 +130,18 @@ export class ClassAsStringComponent {}
 Or using an array property
 
 ```ts
-@Component({ selector: 'class-as-string',
+@Component({
+  selector: 'class-as-string',
   template: '<p [ngClass]="classes" class="orange"></p>',
-  styles: [ ... ]
 })
 export class ClassAsStringComponent {
   classes = ['centered-text', 'underlined'];
 }
 ```
 
-[View Example](https://plnkr.co/edit/uYihwapmBxNaqGDeawwS?p=preview)
-
 ---
 <!-- .slide: id="directives-ngclass-4" -->
-## `NgClass` Directive (4/4) - Object
+## `NgClass` Directive (4/5) - Object
 
 ```ts
 @Component({
@@ -178,13 +165,39 @@ Result:
 <p class="orange centered-text"></p>
 ```
 
-[View Example](https://plnkr.co/edit/0xrwGT?p=preview)
+---
+<!-- .slide: id="directives-ngclass-5" -->
+## `NgClass` Directive (5/5) - Attribute
+
+```ts
+@Component({
+  selector: 'class-as-string',
+  template: `
+    <p
+      [class.centered-text]="isCentered"
+      [class.underlined]="isUnderlined"
+      class="orange">
+    </p>`,
+  styles: [ ... ]
+})
+export class ClassAsStringComponent {
+  isCentered = true;
+  isUnderlined = false;
+}
+```
+
+Result:
+
+```html
+<p class="orange centered-text"></p>
+```
 
 ---
+
 <!-- .slide: id="directives-structural-directives" -->
 ## Structural Directives
 
-- Handles how a component or native element renders using the `<template>` tag
+- Handles how a component or native element renders using the `<ng-template>` tag
 - Have their own special syntax in the template `*myDirective`
 - Built-in structural directives
   - `ngIf` and `ngFor`: seen before
@@ -218,9 +231,8 @@ export class AppComponent {
 }
 ```
 
-[View Example](https://plnkr.co/edit/MEG6RBlrF82kWNYxwFlk?p=preview)
-
 ---
+
 <!-- .slide: id="directives-multiple-structural-directives" -->
 ## Using Multiple Structural Directives
 
@@ -233,15 +245,20 @@ A component or native element can only be bound to one directive at a time
 </div>
 ```
 
-We need to use the alternative syntax using the `<template>` tag
+We need to use the alternative syntax using the `<ng-template>` tag
 
 ```html
 <!-- Allowed -->
-<template ngFor [ngForOf]="[1,2,3,4,5,6]" let-item>
+<ng-template ngFor [ngForOf]="[1,2,3,4,5,6]" let-item>
   <div *ngIf="item > 3">
     {{item}}
   </div>
-</template>
+</ng-template>
 ```
 
-[View Example](https://plnkr.co/edit/gmIbP6s7S1pN7vDk9YHG?p=preview)
+---
+<!-- .slide: id="directives-demo" -->
+
+## Let's mark those todos!
+
+![demo](../images/todo-list-marked.png)

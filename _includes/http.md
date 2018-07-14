@@ -2,19 +2,11 @@
 <!-- .slide: id="http" -->
 ## Building Applications with Angular
 
-# The HTTP Service
-
----
-<!-- .slide: id="http-roadmap" -->
-## Roadmap
-
-1. How does Angular interact with HTTP?
-1. How can I get data from a server?
-1. How can I send data to a server?
+# The HttpClient Service
 
 ---
 <!-- .slide: id="http-http-service" -->
-## The Built-in `Http` Service
+## The Built-in `HttpClient` Service
 
 - Service provided by Angular to perform REST operations
 - Has a method for each HTTP verb: `get`, `post`, `put`, `delete`
@@ -25,78 +17,30 @@
 <!-- .slide: id="http-importing" -->
 ## Importing the Service
 
-- Angular CLI automatically imports `HttpModule` in `app.module.ts`
+- We need to import `HttpClientModule` in `app.module.ts`
 
 ```ts
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  //...other content...
+  //...
   imports: [
-    //...other imports...
-    HttpModule
+    //...
+    HttpClientModule
   ],
-  //...other content...
+  //...
 })
 export class AppModule {}
 ```
 
-<!-- preview: https://plnkr.co/edit/l4n2upSueYw5UbFjZB1C?p=preview -->
-
 ---
-<!-- .slide: id="http-json-server" -->
-## Interlude: Setting Up a JSON Data Server
 
-- Use [JSON Server](https://github.com/typicode/json-server) to set up a little JSON store
-- `npm install json-server --save`
-- Create the file shown below in `src/db.json`
-- `./node_modules/.bin/json-server --watch src/db.json`
-- Go to <http://localhost:3000/items> to test
-
-_src/db.json_
-```ts
-{
-  "items": [
-    {"id": 0, "text": "Learn JavaScript"},
-    {"id": 1, "text": "Learn Node"},
-    {"id": 2, "text": "Learn Angular"}
-  ]
-}
-```
-
----
-<!-- .slide: id="http-using-on-startup" -->
-## Using the HTTP Service on Startup
-
-- Modify `AppComponent` to ask `ToDoService` to initialize itself
-
-#### _src/app/app.component.ts_
-```ts
-import { Component, OnInit } from '@angular/core';
-// ...as before...
-
-export class AppComponent implements OnInit {
-  // ...as before...
-  constructor(
-    private toDoService: ToDoService
-  ) {
-  }
-
-  ngOnInit() {
-    this.toDoService.initialize();
-  }
-}
-```
-
-- Get a compiler error (since `toDoService.initialize` isn't defined yet)
-
----
 <!-- .slide: id="http-fetching-data-1" -->
 ## Fetch Data From the Server
 
-#### _src/app/to-do.service.ts_
+#### _src/app/todo.service.ts_
 ```ts
-export class ToDoService {
+export class TodoService {
 
   baseUrl: string = 'http://localhost:3000';
 
@@ -108,7 +52,6 @@ export class ToDoService {
       .subscribe(
         (body) => { 
           this.items = body.map(item => item.text);
-          this.changes.next(this.items);
         },
         (err) => { console.log(err); }
       );
@@ -117,24 +60,7 @@ export class ToDoService {
 ```
 
 ---
-<!-- .slide: id="http-fetching-data-2" -->
-## Fetch Data From the Server
 
-1. In real applications, `baseUrl` will be a configuration parameter.
-1. Define `url` to point to the root of your REST API
-1. Use the `http` service to GET that URL...
-1. ...then use `map` to extract the JSON body from the result...
-   - This is `Observable.map` on one item, not `Array.map` on many
-1. ...then use `subscribe` to handle the (single) notification from the observable
-   - If all goes well, extract the text of the to-do list using `body.map`
-   - If there's an error, report it
-
-<!-- comment needed to separate lists -->
-- Note: JSON Server requires us to:
-  1. Store lists as objects with an `id` field
-- Which is why we need to use `body.map` to extract the text only
-
----
 <!-- .slide: id="http-sending-data" -->
 ## Send Data to Server
 
@@ -143,20 +69,64 @@ export class ToDoService {
   addItem(item: string) {
     const url = `${this.baseUrl}/items`;
     this.http
-      .post(url, { 'text': item })
+      .post(url, {text: item})
       .map(res => res.json())
       .subscribe(
         (res) => {
-          if (res) {
-            this.items.push(res);
-            this.changes.next(this.items);
-          }
+          if (res) this.items.push(res);
         },
         (err) => { console.log(err); }
-        );
+      );
   }
 ```
 
-- Note structure of data sent to server (required by JSON Server)
-  - JSON Server will automatically insert the `id`
-- Only handle error returns in `subscribe`
+---
+
+<!-- .slide: id="http-advanced-cancel-request" -->
+## Cancel a Request
+
+- One of the greatest benefits to using observables over promises is the ability to cancel `http` requests
+
+```ts
+  search() {
+    const request = this.searchService.search(this.searchField.value)
+      .subscribe(
+        result => { this.result = result.artists.items; },
+        err => { this.errorMessage = err.message; },
+        () => { console.log('Completed'); }
+      );
+
+    // cancel request
+    request.unsubscribe();
+  }
+```
+
+---
+
+<!-- .slide: id="http-advanced-retry-request" -->
+## Retry a request
+
+- Retry a failed request with the `retry` operator
+- Useful for when a user's connection is lost
+- `retry` takes an argument to specify the number of retries
+- if no argument is given, the request will be retried indefinitely
+
+```ts
+  search(term: string) {
+    let tryCount = 0;
+    return this.http.get('https://api.spotify.com/v1/dsds?q=' + term + '&type=artist')
+      .map(response => response.json())
+      .retry(3);  // Will retry failed request 3 times
+}
+```
+- **Note:** The `onError` callback will not execute during the retry phase. The stream will only throw an error after the retry phase is complete
+
+---
+
+<!-- .slide: id="http-demo" -->
+
+## Let's bring some "real life" data!
+
+- https://jsonplaceholder.typicode.com/todos
+
+<img alt="demo" src="../images/todo-list-xhr.png" width="600px" />
