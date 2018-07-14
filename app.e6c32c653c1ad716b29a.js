@@ -72,7 +72,7 @@
 /******/ 		script.async = true;
 /******/ 		script.timeout = 120000;
 /******/
-/******/ 		script.src = __webpack_require__.p + "" + chunkId + "." + "bef5dcc5fd266afb4836" + ".js";
+/******/ 		script.src = __webpack_require__.p + "" + chunkId + "." + "e6c32c653c1ad716b29a" + ".js";
 /******/ 		var timeout = setTimeout(onScriptComplete, 120000);
 /******/ 		script.onerror = script.onload = onScriptComplete;
 /******/ 		function onScriptComplete() {
@@ -198,10 +198,27 @@ module.exports = function() {
 	Author Tobias Koppers @sokra
 */
 module.exports = function(src) {
-	if (typeof execScript !== "undefined")
-		execScript(src);
-	else
-		eval.call(null, src);
+	function log(error) {
+		(typeof console !== "undefined")
+		&& (console.error || console.log)("[Script Loader]", error);
+	}
+
+	// Check for IE =< 8
+	function isIE() {
+		return typeof attachEvent !== "undefined" && typeof addEventListener === "undefined";
+	}
+
+	try {
+		if (typeof execScript !== "undefined" && isIE()) {
+			execScript(src);
+		} else if (typeof eval !== "undefined") {
+			eval.call(null, src);
+		} else {
+			log("EvalError: No eval function available");
+		}
+	} catch (error) {
+		log(error);
+	}
 }
 
 
@@ -461,116 +478,6 @@ function updateLink(linkElement, obj) {
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "36572bfc34739c1ed01c58d1d544aaa4.svg";
-
-/***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(11);
-if(typeof content === 'string') content = [[module.i, content, '']];
-// add the styles to the DOM
-var update = __webpack_require__(2)(content, {});
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../../../css-loader/index.js!./paper.css", function() {
-			var newContent = require("!!../../../css-loader/index.js!./paper.css");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ },
-/* 5 */
-/***/ function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(12);
-if(typeof content === 'string') content = [[module.i, content, '']];
-// add the styles to the DOM
-var update = __webpack_require__(2)(content, {});
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../../../css-loader/index.js!./pdf.css", function() {
-			var newContent = require("!!../../../css-loader/index.js!./pdf.css");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ },
-/* 6 */
-/***/ function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(14);
-if(typeof content === 'string') content = [[module.i, content, '']];
-// add the styles to the DOM
-var update = __webpack_require__(2)(content, {});
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./main.scss", function() {
-			var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./main.scss");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ },
-/* 7 */
-/***/ function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(15);
-if(typeof content === 'string') content = [[module.i, content, '']];
-// add the styles to the DOM
-var update = __webpack_require__(2)(content, {});
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./print.scss", function() {
-			var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./print.scss");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ },
-/* 8 */
-/***/ function(module, exports, __webpack_require__) {
-
 __webpack_require__(23);
 __webpack_require__(21);
 
@@ -603,14 +510,118 @@ __webpack_require__.e/* nsure */(0).catch(function(err) { __webpack_require__.oe
   __webpack_require__(27);
   window.hljs.initHighlightingOnLoad();
 
-  __webpack_require__(30);
-  __webpack_require__(28);
   __webpack_require__(29);
+  __webpack_require__(28);
+  // require('script!reveal.js/plugin/search/search.js');
 }).bind(null, __webpack_require__));
 
 
 /***/ },
-/* 9 */
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(10);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// add the styles to the DOM
+var update = __webpack_require__(2)(content, {});
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../../css-loader/index.js!./paper.css", function() {
+			var newContent = require("!!../../../css-loader/index.js!./paper.css");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(11);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// add the styles to the DOM
+var update = __webpack_require__(2)(content, {});
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../../css-loader/index.js!./pdf.css", function() {
+			var newContent = require("!!../../../css-loader/index.js!./pdf.css");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(13);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// add the styles to the DOM
+var update = __webpack_require__(2)(content, {});
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../node_modules/css-loader/index.js!../node_modules/sass-loader/index.js!./main.scss", function() {
+			var newContent = require("!!../node_modules/css-loader/index.js!../node_modules/sass-loader/index.js!./main.scss");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(14);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// add the styles to the DOM
+var update = __webpack_require__(2)(content, {});
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../node_modules/css-loader/index.js!../node_modules/sass-loader/index.js!./print.scss", function() {
+			var newContent = require("!!../node_modules/css-loader/index.js!../node_modules/sass-loader/index.js!./print.scss");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ },
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)();
@@ -624,7 +635,7 @@ exports.push([module.i, "/*\n\nColorbrewer theme\nOriginal: https://github.com/m
 
 
 /***/ },
-/* 10 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)();
@@ -638,7 +649,7 @@ exports.push([module.i, "/*\n\ngithub.com style (c) Vasily Polovnyov <vast@white
 
 
 /***/ },
-/* 11 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)();
@@ -652,7 +663,7 @@ exports.push([module.i, "/* Default Print Stylesheet Template\n   by Rob Glazebr
 
 
 /***/ },
-/* 12 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)();
@@ -666,7 +677,7 @@ exports.push([module.i, "/**\n * This stylesheet is used to print reveal.js\n * 
 
 
 /***/ },
-/* 13 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)();
@@ -680,16 +691,30 @@ exports.push([module.i, "/*!\n * reveal.js\n * http://lab.hakim.se/reveal-js\n *
 
 
 /***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)();
+// imports
+exports.i(__webpack_require__(12), "");
+exports.i(__webpack_require__(8), "");
+
+// module
+exports.push([module.i, "@font-face {\n  font-family: 'Calibre';\n  src: url(\"https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Regular.eot\");\n  src: url(\"https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Regular.eot?#iefix\") format(\"embedded-opentype\"), url(\"https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Regular.woff2\") format(\"woff2\"), url(\"https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Regular.woff\") format(\"woff\"); }\n\n@font-face {\n  font-family: 'Calibre';\n  src: url(\"https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Light.eot\");\n  src: url(\"https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Light.eot?#iefix\") format(\"embedded-opentype\"), url(\"https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Light.woff2\") format(\"woff2\"), url(\"https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Light.woff\") format(\"woff\"); }\n\n/*********************************************\n * GLOBAL STYLES\n *********************************************/\nbody {\n  background: #FFFFFF;\n  background-color: #FFFFFF; }\n\n.reveal {\n  font-family: \"Calibre\", sans-serif;\n  font-size: 32px;\n  font-weight: normal;\n  color: #fff; }\n\n::selection {\n  color: #fff;\n  background: #ee302f;\n  text-shadow: none; }\n\n.reveal .slides > section,\n.reveal .slides > section > section {\n  line-height: 1.3;\n  font-weight: inherit; }\n\n/*********************************************\n * HEADERS\n *********************************************/\n.reveal h1,\n.reveal h2,\n.reveal h3,\n.reveal h4,\n.reveal h5,\n.reveal h6 {\n  margin: 0 0 20px 0;\n  color: #ee302f;\n  font-family: \"Calibre\", sans-serif;\n  font-weight: normal;\n  line-height: 1.2;\n  letter-spacing: normal;\n  text-transform: none;\n  text-shadow: none;\n  word-wrap: break-word; }\n\n.reveal h1 {\n  font-size: 1.5em; }\n\n.reveal h2 {\n  font-size: 1.4em; }\n\n.reveal h3 {\n  font-size: 1em; }\n\n.reveal h4 {\n  font-size: 0.75em; }\n\n.reveal h1 {\n  text-shadow: none; }\n\n/*********************************************\n * OTHER\n *********************************************/\n.reveal p {\n  margin: 20px 0;\n  line-height: 1.3; }\n\n/* Ensure certain elements are never larger than the slide itself */\n.reveal img,\n.reveal video,\n.reveal iframe {\n  max-width: 95%;\n  max-height: 95%; }\n\n.reveal strong,\n.reveal b {\n  font-weight: bold; }\n\n.reveal em {\n  font-style: italic; }\n\n.reveal ol,\n.reveal dl,\n.reveal ul {\n  display: inline-block;\n  text-align: left;\n  margin: 0 0 0 1em; }\n\n.reveal ol {\n  list-style-type: decimal; }\n\n.reveal ul {\n  list-style-type: disc; }\n\n.reveal ul ul {\n  list-style-type: square; }\n\n.reveal ul ul ul {\n  list-style-type: circle; }\n\n.reveal ul ul,\n.reveal ul ol,\n.reveal ol ol,\n.reveal ol ul {\n  display: block;\n  margin-left: 40px; }\n\n.reveal dt {\n  font-weight: bold; }\n\n.reveal dd {\n  margin-left: 40px; }\n\n.reveal q,\n.reveal blockquote {\n  quotes: none; }\n\n.reveal blockquote {\n  display: block;\n  position: relative;\n  width: 70%;\n  margin: 20px auto;\n  padding: 5px;\n  font-style: italic;\n  background: rgba(255, 255, 255, 0.05);\n  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2); }\n\n.reveal blockquote p:first-child,\n.reveal blockquote p:last-child {\n  display: inline-block; }\n\n.reveal q {\n  font-style: italic; }\n\n.reveal pre {\n  display: block;\n  position: relative;\n  width: 90%;\n  margin: 20px auto;\n  text-align: left;\n  font-size: 0.55em;\n  font-family: monospace;\n  line-height: 1.2em;\n  word-wrap: break-word;\n  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3); }\n\n.reveal code {\n  font-family: monospace; }\n\n.reveal pre code {\n  display: block;\n  padding: 5px;\n  overflow: auto;\n  max-height: 400px;\n  word-wrap: normal; }\n\n.reveal table {\n  margin: auto;\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n.reveal table th {\n  font-weight: bold; }\n\n.reveal table th,\n.reveal table td {\n  text-align: left;\n  padding: 0.2em 0.5em 0.2em 0.5em;\n  border-bottom: 1px solid; }\n\n.reveal table th[align=\"center\"],\n.reveal table td[align=\"center\"] {\n  text-align: center; }\n\n.reveal table th[align=\"right\"],\n.reveal table td[align=\"right\"] {\n  text-align: right; }\n\n.reveal table tbody tr:last-child th,\n.reveal table tbody tr:last-child td {\n  border-bottom: none; }\n\n.reveal sup {\n  vertical-align: super; }\n\n.reveal sub {\n  vertical-align: sub; }\n\n.reveal small {\n  display: inline-block;\n  font-size: 0.6em;\n  line-height: 1.2em;\n  vertical-align: top; }\n\n.reveal small * {\n  vertical-align: top; }\n\n/*********************************************\n * LINKS\n *********************************************/\n.reveal a {\n  color: #f68e8d;\n  text-decoration: none;\n  -webkit-transition: color .15s ease;\n  -moz-transition: color .15s ease;\n  transition: color .15s ease; }\n\n.reveal a:hover {\n  color: #fdecec;\n  text-shadow: none;\n  border: none; }\n\n.reveal .roll span:after {\n  color: #fff;\n  background: #f04747; }\n\n/*********************************************\n * IMAGES\n *********************************************/\n.reveal section img {\n  margin: 15px 0px;\n  background: rgba(255, 255, 255, 0.12);\n  border: 4px solid #fff;\n  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); }\n\n.reveal section img.plain {\n  border: 0;\n  box-shadow: none; }\n\n.reveal a img {\n  -webkit-transition: all .15s linear;\n  -moz-transition: all .15s linear;\n  transition: all .15s linear; }\n\n.reveal a:hover img {\n  background: rgba(255, 255, 255, 0.2);\n  border-color: #f68e8d;\n  box-shadow: 0 0 20px rgba(0, 0, 0, 0.55); }\n\n/*********************************************\n * NAVIGATION CONTROLS\n *********************************************/\n.reveal .controls .navigate-left,\n.reveal .controls .navigate-left.enabled {\n  border-right-color: #f68e8d; }\n\n.reveal .controls .navigate-right,\n.reveal .controls .navigate-right.enabled {\n  border-left-color: #f68e8d; }\n\n.reveal .controls .navigate-up,\n.reveal .controls .navigate-up.enabled {\n  border-bottom-color: #f68e8d; }\n\n.reveal .controls .navigate-down,\n.reveal .controls .navigate-down.enabled {\n  border-top-color: #f68e8d; }\n\n.reveal .controls .navigate-left.enabled:hover {\n  border-right-color: #fdecec; }\n\n.reveal .controls .navigate-right.enabled:hover {\n  border-left-color: #fdecec; }\n\n.reveal .controls .navigate-up.enabled:hover {\n  border-bottom-color: #fdecec; }\n\n.reveal .controls .navigate-down.enabled:hover {\n  border-top-color: #fdecec; }\n\n/*********************************************\n * PROGRESS BAR\n *********************************************/\n.reveal .progress {\n  background: rgba(0, 0, 0, 0.2); }\n\n.reveal .progress span {\n  background: #f68e8d;\n  -webkit-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);\n  -moz-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);\n  transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985); }\n\nbody p, body ul, body ol, body table {\n  color: #422D51; }\n\n.reveal {\n  font-weight: lighter; }\n  .reveal ol, .reveal ul {\n    width: 100%; }\n  .reveal table {\n    margin: 20px 0; }\n  .reveal h1:after {\n    background-color: #422D51;\n    content: '';\n    display: block;\n    height: 4px;\n    margin-top: -200px;\n    width: 18em; }\n  .reveal h1 {\n    color: #ee302f;\n    font-weight: bold;\n    left: 0 !important;\n    margin-left: auto !important;\n    margin-right: auto !important;\n    position: absolute !important;\n    right: 0 !important;\n    top: 250px !important; }\n  .reveal h5 {\n    color: #422D51;\n    font-size: 0.75em;\n    margin-top: 0.5em; }\n  .reveal h5 {\n    color: #422D51;\n    font-size: 0.6em;\n    margin-top: 0.5em; }\n  .reveal .slide-number {\n    font-size: 1em; }\n  .reveal .controls {\n    bottom: 50px; }\n  .reveal .slides {\n    background: url(" + __webpack_require__(15) + ") top right no-repeat;\n    background-size: 150px auto;\n    margin-top: 60px;\n    text-align: left; }\n    .reveal .slides > section,\n    .reveal .slides > section > section {\n      padding: 10px 0; }\n  .reveal .hljs {\n    background: #F7F7F7;\n    margin: 20px auto;\n    padding: 0.8em; }\n  .reveal pre {\n    box-shadow: none;\n    font-size: 0.75em;\n    width: auto; }\n    .reveal pre code {\n      max-height: none; }\n  .reveal h2 code,\n  .reveal p code,\n  .reveal li code,\n  .reveal table code {\n    font-size: 0.8em;\n    padding: 0 5px; }\n  .reveal .progress span {\n    background: #ee302f; }\n\nhtml.the-end .state-background {\n  background-color: rgba(0, 0, 0, 0.8); }\n", ""]);
+
+// exports
+
+
+/***/ },
 /* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)();
 // imports
-exports.i(__webpack_require__(13), "");
-exports.i(__webpack_require__(9), "");
+exports.i(__webpack_require__(9), "only print");
 
 // module
-exports.push([module.i, "@font-face {\n  font-family: 'Calibre';\n  src: url(\"https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Regular.eot\");\n  src: url(\"https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Regular.eot?#iefix\") format(\"embedded-opentype\"), url(\"https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Regular.woff2\") format(\"woff2\"), url(\"https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Regular.woff\") format(\"woff\"); }\n\n@font-face {\n  font-family: 'Calibre';\n  src: url(\"https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Light.eot\");\n  src: url(\"https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Light.eot?#iefix\") format(\"embedded-opentype\"), url(\"https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Light.woff2\") format(\"woff2\"), url(\"https://s3.amazonaws.com/rangle.io.static-assets/WebFonts/CalibreWeb-Light.woff\") format(\"woff\"); }\n\n/*********************************************\n * GLOBAL STYLES\n *********************************************/\nbody {\n  background: #FFFFFF;\n  background-color: #FFFFFF; }\n\n.reveal {\n  font-family: \"Calibre\", sans-serif;\n  font-size: 32px;\n  font-weight: normal;\n  color: #fff; }\n\n::selection {\n  color: #fff;\n  background: #ee302f;\n  text-shadow: none; }\n\n.reveal .slides > section,\n.reveal .slides > section > section {\n  line-height: 1.3;\n  font-weight: inherit; }\n\n/*********************************************\n * HEADERS\n *********************************************/\n.reveal h1,\n.reveal h2,\n.reveal h3,\n.reveal h4,\n.reveal h5,\n.reveal h6 {\n  margin: 0 0 20px 0;\n  color: #ee302f;\n  font-family: \"Calibre\", sans-serif;\n  font-weight: normal;\n  line-height: 1.2;\n  letter-spacing: normal;\n  text-transform: none;\n  text-shadow: none;\n  word-wrap: break-word; }\n\n.reveal h1 {\n  font-size: 1.5em; }\n\n.reveal h2 {\n  font-size: 1.4em; }\n\n.reveal h3 {\n  font-size: 1em; }\n\n.reveal h4 {\n  font-size: 1.8em; }\n\n.reveal h1 {\n  text-shadow: none; }\n\n/*********************************************\n * OTHER\n *********************************************/\n.reveal p {\n  margin: 20px 0;\n  line-height: 1.3; }\n\n/* Ensure certain elements are never larger than the slide itself */\n.reveal img,\n.reveal video,\n.reveal iframe {\n  max-width: 95%;\n  max-height: 95%; }\n\n.reveal strong,\n.reveal b {\n  font-weight: bold; }\n\n.reveal em {\n  font-style: italic; }\n\n.reveal ol,\n.reveal dl,\n.reveal ul {\n  display: inline-block;\n  text-align: left;\n  margin: 0 0 0 1em; }\n\n.reveal ol {\n  list-style-type: decimal; }\n\n.reveal ul {\n  list-style-type: disc; }\n\n.reveal ul ul {\n  list-style-type: square; }\n\n.reveal ul ul ul {\n  list-style-type: circle; }\n\n.reveal ul ul,\n.reveal ul ol,\n.reveal ol ol,\n.reveal ol ul {\n  display: block;\n  margin-left: 40px; }\n\n.reveal dt {\n  font-weight: bold; }\n\n.reveal dd {\n  margin-left: 40px; }\n\n.reveal q,\n.reveal blockquote {\n  quotes: none; }\n\n.reveal blockquote {\n  display: block;\n  position: relative;\n  width: 70%;\n  margin: 20px auto;\n  padding: 5px;\n  font-style: italic;\n  background: rgba(255, 255, 255, 0.05);\n  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2); }\n\n.reveal blockquote p:first-child,\n.reveal blockquote p:last-child {\n  display: inline-block; }\n\n.reveal q {\n  font-style: italic; }\n\n.reveal pre {\n  display: block;\n  position: relative;\n  width: 90%;\n  margin: 20px auto;\n  text-align: left;\n  font-size: 0.55em;\n  font-family: monospace;\n  line-height: 1.2em;\n  word-wrap: break-word;\n  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3); }\n\n.reveal code {\n  font-family: monospace; }\n\n.reveal pre code {\n  display: block;\n  padding: 5px;\n  overflow: auto;\n  max-height: 400px;\n  word-wrap: normal; }\n\n.reveal table {\n  margin: auto;\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n.reveal table th {\n  font-weight: bold; }\n\n.reveal table th,\n.reveal table td {\n  text-align: left;\n  padding: 0.2em 0.5em 0.2em 0.5em;\n  border-bottom: 1px solid; }\n\n.reveal table th[align=\"center\"],\n.reveal table td[align=\"center\"] {\n  text-align: center; }\n\n.reveal table th[align=\"right\"],\n.reveal table td[align=\"right\"] {\n  text-align: right; }\n\n.reveal table tbody tr:last-child th,\n.reveal table tbody tr:last-child td {\n  border-bottom: none; }\n\n.reveal sup {\n  vertical-align: super; }\n\n.reveal sub {\n  vertical-align: sub; }\n\n.reveal small {\n  display: inline-block;\n  font-size: 0.6em;\n  line-height: 1.2em;\n  vertical-align: top; }\n\n.reveal small * {\n  vertical-align: top; }\n\n/*********************************************\n * LINKS\n *********************************************/\n.reveal a {\n  color: #f68e8d;\n  text-decoration: none;\n  -webkit-transition: color .15s ease;\n  -moz-transition: color .15s ease;\n  transition: color .15s ease; }\n\n.reveal a:hover {\n  color: #fdecec;\n  text-shadow: none;\n  border: none; }\n\n.reveal .roll span:after {\n  color: #fff;\n  background: #f04747; }\n\n/*********************************************\n * IMAGES\n *********************************************/\n.reveal section img {\n  margin: 15px 0px;\n  background: rgba(255, 255, 255, 0.12);\n  border: 4px solid #fff;\n  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); }\n\n.reveal section img.plain {\n  border: 0;\n  box-shadow: none; }\n\n.reveal a img {\n  -webkit-transition: all .15s linear;\n  -moz-transition: all .15s linear;\n  transition: all .15s linear; }\n\n.reveal a:hover img {\n  background: rgba(255, 255, 255, 0.2);\n  border-color: #f68e8d;\n  box-shadow: 0 0 20px rgba(0, 0, 0, 0.55); }\n\n/*********************************************\n * NAVIGATION CONTROLS\n *********************************************/\n.reveal .controls .navigate-left,\n.reveal .controls .navigate-left.enabled {\n  border-right-color: #f68e8d; }\n\n.reveal .controls .navigate-right,\n.reveal .controls .navigate-right.enabled {\n  border-left-color: #f68e8d; }\n\n.reveal .controls .navigate-up,\n.reveal .controls .navigate-up.enabled {\n  border-bottom-color: #f68e8d; }\n\n.reveal .controls .navigate-down,\n.reveal .controls .navigate-down.enabled {\n  border-top-color: #f68e8d; }\n\n.reveal .controls .navigate-left.enabled:hover {\n  border-right-color: #fdecec; }\n\n.reveal .controls .navigate-right.enabled:hover {\n  border-left-color: #fdecec; }\n\n.reveal .controls .navigate-up.enabled:hover {\n  border-bottom-color: #fdecec; }\n\n.reveal .controls .navigate-down.enabled:hover {\n  border-top-color: #fdecec; }\n\n/*********************************************\n * PROGRESS BAR\n *********************************************/\n.reveal .progress {\n  background: rgba(0, 0, 0, 0.2); }\n\n.reveal .progress span {\n  background: #f68e8d;\n  -webkit-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);\n  -moz-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);\n  transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985); }\n\n#rangle-io {\n  background: url(" + __webpack_require__(3) + ") no-repeat;\n  background-size: contain;\n  height: 0.4em;\n  left: 0 !important;\n  position: absolute !important;\n  right: 0 !important;\n  text-indent: -99999em;\n  top: 180px !important; }\n  #rangle-io:before {\n    display: none; }\n\nbody p, body ul, body ol, body table {\n  color: #422D51; }\n\n.reveal {\n  font-weight: lighter; }\n  .reveal ol, .reveal ul {\n    width: 100%; }\n  .reveal table {\n    margin: 20px 0; }\n  .reveal h1:after {\n    background-color: #422D51;\n    content: '';\n    display: block;\n    height: 4px;\n    margin-top: -200px;\n    width: 18em; }\n  .reveal h1 {\n    color: #ee302f;\n    font-weight: bold;\n    left: 0 !important;\n    margin-left: auto !important;\n    margin-right: auto !important;\n    position: absolute !important;\n    right: 0 !important;\n    top: 250px !important; }\n  .reveal h5 {\n    color: #422D51;\n    font-size: 0.6em;\n    margin-top: 0.5em; }\n  .reveal .slide-number {\n    font-size: 1em; }\n  .reveal .controls {\n    bottom: 50px; }\n  .reveal .slides {\n    background: url(" + __webpack_require__(3) + ") top right no-repeat;\n    background-size: 125px auto;\n    margin-top: 60px;\n    text-align: left; }\n    .reveal .slides > section,\n    .reveal .slides > section > section {\n      padding: 10px 0; }\n  .reveal .hljs {\n    background: #F7F7F7;\n    margin: 20px auto;\n    padding: 0.8em; }\n  .reveal pre {\n    box-shadow: none;\n    font-size: 0.75em;\n    width: auto; }\n    .reveal pre code {\n      max-height: none; }\n  .reveal h2 code,\n  .reveal p code,\n  .reveal li code,\n  .reveal table code {\n    font-size: 0.8em;\n    padding: 0 5px; }\n  .reveal .progress span {\n    background: #ee302f; }\n\nhtml.the-end .state-background {\n  background-color: rgba(0, 0, 0, 0.8); }\n\n.searchicon {\n  display: none; }\n\n.searchinput {\n  vertical-align: top;\n  right: 45px;\n  top: 30px;\n  position: fixed; }\n", ""]);
+exports.push([module.i, "/* Additions to the print stylesheet */\n@media print {\n  .reveal .slides > section, .reveal .slides > section > section {\n    padding: 0; }\n  body, p, td, li, div,\n  h1, h2, h3, h4, h5, h6 {\n    font-family: 'Calibre', sans-serif !important; }\n  .reveal pre,\n  .reveal code,\n  .reveal pre code,\n  .reveal .hljs {\n    background: #fafafa;\n    color: #333;\n    font-size: 0.7em; }\n  .reveal h1 {\n    left: 0 !important;\n    position: relative !important;\n    right: 0 !important;\n    top: 0 !important; }\n  .reveal .controls,\n  .reveal .slide-number {\n    display: none !important; } }\n", ""]);
 
 // exports
 
@@ -698,15 +723,7 @@ exports.push([module.i, "@font-face {\n  font-family: 'Calibre';\n  src: url(\"h
 /* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(0)();
-// imports
-exports.i(__webpack_require__(10), "only print");
-
-// module
-exports.push([module.i, "/* Additions to the print stylesheet */\n@media print {\n  .reveal .slides > section, .reveal .slides > section > section {\n    padding: 0; }\n  body, p, td, li, div,\n  h1, h2, h3, h4, h5, h6 {\n    font-family: 'Calibre', sans-serif !important; }\n  .reveal pre,\n  .reveal code,\n  .reveal pre code,\n  .reveal .hljs {\n    background: #fafafa;\n    color: #333;\n    font-size: 0.7em; }\n  #rangle-io {\n    background-image: none;\n    left: 0 !important;\n    position: relative !important;\n    right: 0 !important;\n    text-indent: 0;\n    top: 0 !important; }\n  .reveal h1 {\n    left: 0 !important;\n    position: relative !important;\n    right: 0 !important;\n    top: 0 !important; }\n  .reveal .controls,\n  .reveal .slide-number {\n    display: none !important; } }\n", ""]);
-
-// exports
-
+module.exports = __webpack_require__.p + "99f3a9c22e549898422c726c7c521714.svg";
 
 /***/ },
 /* 16 */
@@ -775,7 +792,7 @@ __webpack_require__(1)(__webpack_require__(20))
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__css_main_scss__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__css_main_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__css_main_scss__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__js_config_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__js_config_js__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__js_config_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__js_config_js__);
 // CSS imports
 
