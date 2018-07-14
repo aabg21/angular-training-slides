@@ -5,23 +5,13 @@
 # Template Driven Forms
 
 ---
-<!-- .slide: id="template-forms-roadmap" -->
-
-## Roadmap
-
-1. How does Angular support forms?
-1. How do I create a template driven form?
-1. How do I handle form data?
-1. How do I validate form data?
-1. How do I display error messages?
-
----
 <!-- .slide: id="template-forms-overview" -->
 ## Overview
 
-- Template Driven Forms: controls and validation rules defined in the template with directives
-- Reactive Forms: controls and validation rules defined in the component class or service
-  - Explore these in the next section
+- **Template Driven Forms**
+  - Controls and validation rules defined in the template with directives
+- **Reactive Forms**
+  - controls and validation rules defined in the component class or service
 
 ---
 <!-- .slide: id="template-forms-creating" -->
@@ -32,17 +22,15 @@
 
 #### _src/app/app.module.ts_
 ```ts
-// ...existing imports...
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  // ...as before...
+  // ...
   imports: [
-    BrowserModule,
-    HttpModule,
-    FormsModule        // added
+    / ...
+    FormsModule
   ],
-  // ...as before...
+  // ...
 })
 export class AppModule { }
 ```
@@ -80,8 +68,8 @@ export class AppModule { }
 
 `NgForm` instances have several useful properties:
 
-- `newItemForm.value`: all form values
 - `newItemForm.valid`: whether the form is valid
+- `newItemForm.value`: all form values
 - `newItemForm.value.newItem`: the value of the `newItem` field
 
 #### _src/app/generic-input/generic-input.component.html_
@@ -136,8 +124,6 @@ export class AppModule { }
 ```
 
 ![Showing Form Values](../images/screenshot-showing-form-values.png)
-
-<!-- preview: https://plnkr.co/edit/oVQhf641Nx1qpaBG5jeN?p=preview -->
 
 ---
 <!-- .slide: id="template-forms-handling-form-submissions-1" -->
@@ -249,26 +235,6 @@ export class GenericInputComponent implements OnInit {
 | ng-touched     | ng-untouched   | The control has been blurred         |
 
 ---
-<!-- .slide: id="template-forms-styling-the-form-2" -->
-## Styling the Form
-
-- Change example to use these styles
-
-#### _src/app/generic-input/generic-input.component.html_
-```html
-<form #newItemForm="ngForm" (ngSubmit)="registerUser(newItemForm)">
-  <p>New Item: <input name="newItem" #newItem="ngModel" ngModel required></p>
-  <ul class="errors" [hidden]="newItem.valid || newItem.untouched">
-    <li [hidden]="!newItem.hasError('required')">
-      The first name is required
-    </li>
-  </ul>
-  <button type="submit" [disabled]="!newItemForm.valid">Add</button>
-</form>
-```
-<!-- https://plnkr.co/edit/0TR3iu3ANajJdbWixB83?p=preview -->
-
----
 <!-- .slide: id="template-forms-styling-the-form-3" -->
 ## Styling the Form
 
@@ -290,4 +256,3 @@ export class GenericInputComponent implements OnInit {
 
 ![Styling the Form](../images/screenshot-form-css.png)
 
-<!-- https://plnkr.co/edit/BQdO11mdaRpsrk7OD40e?p=preview -->

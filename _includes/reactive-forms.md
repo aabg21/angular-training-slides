@@ -5,26 +5,19 @@
 # Reactive Forms
 
 ---
-<!-- .slide: id="reactive-forms-roadmap" -->
-## Roadmap
-
-1. How do reactive forms differ from template driven forms?
-1. How do I create a reactive form?
-1. How do I validate a reactive form?
-1. How can I create my own validators?
-
----
 <!-- .slide: id="reactive-forms-overview" -->
 ## Overview (again)
 
-- Template Driven Forms: controls and validation rules defined in the template with directives
-- Reactive Forms: controls and validation rules defined in the component class or service
+- **Template Driven Forms**
+  - Controls and validation rules defined in the template with directives
+- **Reactive Forms**
+  - controls and validation rules defined in the component class or service
   - Binding a form to a model
   - Also known as model driven forms
-- Reactive forms can handle controls directly within the component
-  - Push data to the controls and pull values as they change
-- Do *not* use `ngModel` and `required` in the template
- - Define the validation and model as part of our component
+  - Reactive forms can handle controls directly within the component
+    - Push data to the controls and pull values as they change
+  - Do *not* use `ngModel` and `required` in the template
+    - Define the validation and model as part of our component
 
 ---
 <!-- .slide: id="reactive-forms-creating" -->
@@ -369,18 +362,3 @@ export class StructuredFormComponent implements OnInit {
 ## Appearance
 
 ![Form With Groups](../images/screenshot-grouped-form.png)
-
----
-<!-- .slide: id="reactive-forms-shortcuts" -->
-## Shortcuts
-
-- Our component can also use shortcuts to create a `FormControl`
-
-```ts
-createResponsibleFormFields() {
-  this.responsible = this.builder.group({
-    name: new FormControl('Zuko', [Validators.required]),
-    email: new FormControl('zuko@fire.org', [Validators.required])
-  });
-}
-```
