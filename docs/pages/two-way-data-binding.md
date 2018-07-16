@@ -1,4 +1,4 @@
-<!-- .slide: data-background="../images/title-slide.jpg" -->
+<!-- .slide: data-background="images/title-slide.jpg" -->
 <!-- .slide: id="two-way-data-binding" -->
 ## Building Applications with Angular
 

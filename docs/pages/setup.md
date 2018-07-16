@@ -1,4 +1,4 @@
-<!-- .slide: data-background="../images/title-slide.jpg" -->
+<!-- .slide: data-background="images/title-slide.jpg" -->
 <!-- .slide: id="setup-into" -->
 ## Building Applications with Angular
 
@@ -109,7 +109,7 @@ The *application* as a whole has:
   - `Directive`: Properties that add behaviors to elements
   - `Pipe`: Helps to show information
   - `Service`: Logical behaviors
-  
+
 - *Everything is in plain JavaScript*
 - *Everything is a class in Angular*
 

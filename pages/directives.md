@@ -1,4 +1,4 @@
-<!-- .slide: data-background="../images/title-slide.jpg" -->
+<!-- .slide: data-background="images/title-slide.jpg" -->
 <!-- .slide: id="directives" -->
 ## Building Applications with Angular
 
@@ -261,4 +261,4 @@ We need to use the alternative syntax using the `<ng-template>` tag
 
 ## Let's mark those todos!
 
-![demo](../images/todo-list-marked.png)
+![demo](images/todo-list-marked.png)

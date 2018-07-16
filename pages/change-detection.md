@@ -1,4 +1,4 @@
-<!-- .slide: data-background="../images/title-slide.jpg" -->
+<!-- .slide: data-background="images/title-slide.jpg" -->
 <!-- .slide: id="cd" -->
 ## Building Applications with Angular
 
@@ -13,7 +13,7 @@
 - **XHR**: `fetch`, `XMLHttpRequest`, ...
 - **Timers**: `setTimeout`, `requestAnimationFrame`, ...
 
-### 
+###
 
 - Do they have something in common?
   - Yes, they are all async.
@@ -46,14 +46,14 @@ tick() {
 <!-- .slide: id="cd-components-tree" -->
 ## Each component has its own Change Detector
 
-![Change Detector of components](../images/component-cd-tree.png)
+![Change Detector of components](images/component-cd-tree.png)
 
 ---
 
 <!-- .slide: id="cd-components-tree-flow" -->
 ## Change Detection will always begin from root
 
-![Change Detector of components flow](../images/component-cd-tree-flow.png)
+![Change Detector of components flow](images/component-cd-tree-flow.png)
 
 ---
 
@@ -107,7 +107,7 @@ class VCardCmp {
 <!-- .slide: id="cd-components-tree-onpush" -->
 ## Change Detection with OnPush strategy
 
-![Change Detector of components with OnPush](../images/component-cd-tree-onpush.png)
+![Change Detector of components with OnPush](images/component-cd-tree-onpush.png)
 
 ---
 

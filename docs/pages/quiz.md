@@ -1,4 +1,4 @@
-<!-- .slide: data-background="../images/title-slide.jpg" -->
+<!-- .slide: data-background="images/title-slide.jpg" -->
 <!-- .slide: id="instructor-guide" -->
 ## Building Applications with Angular
 
@@ -7,7 +7,7 @@
 ---
 
 <!-- .slide: id="hello-quiz" -->
-<!-- .slide: data-background="../images/question-slide.jpg" -->
+<!-- .slide: data-background="images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -19,7 +19,7 @@ The name for the root module should be `_________`:
 
 +++
 
-<!-- .slide: data-background="../images/answer-slide.jpg" -->
+<!-- .slide: data-background="images/answer-slide.jpg" -->
 
 ## Answer
 
@@ -35,7 +35,7 @@ bring it up that it's convention.
 ---
 
 <!-- .slide: id="quiz-active-users" -->
-<!-- .slide: data-background="../images/question-slide.jpg" -->
+<!-- .slide: data-background="images/question-slide.jpg" -->
 
 ## Question
 
@@ -46,7 +46,7 @@ What would you rather choose?
 
 +++
 
-<!-- .slide: data-background="../images/answer-slide.jpg" -->
+<!-- .slide: data-background="images/answer-slide.jpg" -->
 
 ## Answer
 
@@ -59,7 +59,7 @@ Correct answer is 2.
 ---
 
 <!-- .slide: id="quiz-time-banana" -->
-<!-- .slide: data-background="../images/question-slide.jpg" -->
+<!-- .slide: data-background="images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -83,7 +83,7 @@ export class ClockComponent {
 
 +++
 
-<!-- .slide: data-background="../images/answer-slide.jpg" -->
+<!-- .slide: data-background="images/answer-slide.jpg" -->
 
 ## Answer
 
@@ -103,7 +103,7 @@ names and that suffixing an output member name with `Change`.
 ---
 
 <!-- .slide: id="quiz-component-in-module" -->
-<!-- .slide: data-background="../images/question-slide.jpg" -->
+<!-- .slide: data-background="images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -116,7 +116,7 @@ which field of the `@NgModule` decorator should I put the class in?
 1.  None of the above.
 
 +++
-<!-- .slide: data-background="../images/answer-slide.jpg" -->
+<!-- .slide: data-background="images/answer-slide.jpg" -->
 
 ## Answer
 
@@ -124,7 +124,7 @@ Correct answer is `declarations`.
 
 ---
 <!-- .slide: id="quiz-events" -->
-<!-- .slide: data-background="../images/question-slide.jpg" -->
+<!-- .slide: data-background="images/question-slide.jpg" -->
 
 ## Quiz
 
@@ -135,7 +135,7 @@ What is the difference between:
 (B) `<counter (count)="count()"></counter>`
 
 +++
-<!-- .slide: data-background="../images/answer-slide.jpg" -->
+<!-- .slide: data-background="images/answer-slide.jpg" -->
 
 ## Answer
 

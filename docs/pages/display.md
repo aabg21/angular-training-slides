@@ -1,4 +1,4 @@
-<!-- .slide: data-background="../images/title-slide.jpg" -->
+<!-- .slide: data-background="images/title-slide.jpg" -->
 <!-- .slide: id="display" -->
 ## Building Applications with Angular
 
@@ -85,4 +85,4 @@ export class AppComponent {
 <!-- .slide: id="display-demo" -->
 ## Let's add data to our Todo List!
 
-![demo](../images/todo-list-final.png)
+![demo](images/todo-list-final.png)

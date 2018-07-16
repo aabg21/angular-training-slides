@@ -1,4 +1,4 @@
-<!-- .slide: data-background="../images/title-slide.jpg" -->
+<!-- .slide: data-background="images/title-slide.jpg" -->
 <!-- .slide: id="events" -->
 ## Building Applications with Angular
 
@@ -39,7 +39,7 @@
 ```ts
 export class TodoListComponent implements OnInit {
   // ...
-  
+
   addToDo(text: string) {
     this.thingsToDo.push(text);
   }
@@ -214,4 +214,4 @@ export class AppComponent {
 <!-- .slide: id="events-demo" -->
 ## Let's add events!
 
-![demo](../images/todo-list-final.png)
+![demo](images/todo-list-final.png)

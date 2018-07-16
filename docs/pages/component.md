@@ -1,4 +1,4 @@
-<!-- .slide: data-background="../images/title-slide.jpg" -->
+<!-- .slide: data-background="images/title-slide.jpg" -->
 <!-- .slide: id="components" -->
 ## Building Applications with Angular
 
@@ -62,7 +62,7 @@ export class TodoListComponent implements OnInit {
 <app-todo-list></app-todo-list>
 ```
 
-![Child Component (Original)](../images/todo-list-final.png)
+![Child Component (Original)](images/todo-list-final.png)
 
 ---
 <!-- .slide: id="components-passing-data-1" -->
@@ -159,4 +159,4 @@ These are the most-used lifecycle hooks:
 
 ## Let's get our hands dirty!
 
-![demo](../images/todo-list-final.png)
+![demo](images/todo-list-final.png)
