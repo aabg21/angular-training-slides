@@ -5,7 +5,7 @@
   "main": "dist/bundle.js",
   "repository": {},
   "scripts": {
-    "clean": "rm -rf dist",
+    "clean": "rm -rf docs",
     "build": "npm run clean && webpack",
     "start": "webpack-dev-server",
     "pretest": "tsc --p ./testing/tsconfig.circleci.json",
